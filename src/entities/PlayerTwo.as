@@ -33,6 +33,9 @@ package entities
 		public var spdY:Number = 0;
 		private var goRight:Boolean = true;
 		//private var shootSpawn:Point;
+		
+		private var bullets:Vector.<Bullet>;
+		
 		public function PlayerTwo(x:Number=0, y:Number=0, graphic:Graphic=null, mask:Mask=null) 
 		{
 			graphic = image;
@@ -50,10 +53,17 @@ package entities
 			Input.define("SHOOT2", Key.DIGIT_0);
 			type = "playerTwo";
 			
+			bullets = new Vector.<Bullet>();
+			for (var i:int = 0; i < 10; i++) 
+			{
+				bullets.push(new Bullet());
+			}
 			//shootSpawn = new Point(image.originX + 16, image.originY + 2);
 		}
 		
-		
+		private function shoot():void{
+
+		}
 /** Update the player. */
 		private const SPEED:int = 100;
 
