@@ -23,6 +23,9 @@ package
 		
 		[Embed(source="../assets/bullet.png")]
 		public static const BULLET:Class;
+		
+		[Embed(source="../assets/bullet2.png")]
+		public static const BULLET2:Class;
 	}
 
 }

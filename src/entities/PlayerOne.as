@@ -30,23 +30,21 @@ package entities
 		public var onSolid:Boolean;
 		public var spdX:Number = 0;
 		public var spdY:Number = 0;
-				private var goRight:Boolean = true;
+		private var goRight:Boolean = true;
+		
+		private var health:int = 100;
 		public function PlayerOne(x:Number=0, y:Number=0, graphic:Graphic=null, mask:Mask=null) 
 		{
-			graphic = image;
-			
-/*			image.centerOO();
-			image.smooth = true;*/
-			
+			graphic = image;		
 			setHitbox(16, 16, 0, 0);
 			super(x, y, graphic);
 			
 // Define input keys.
 			Input.define("R1", Key.D);
 			Input.define("L1", Key.A);
-			Input.define("JUMP1", Key.SPACE);
+			Input.define("JUMP1", Key.W);
 			Input.define("SHOOT1", Key.F);
-			type = "playerOne";
+			type = Constants.PLAYER_ONE_TYPE;
 	
 		}
 		
@@ -83,7 +81,7 @@ package entities
 			
 			if (Input.pressed("SHOOT1"))
 			{
-				world.add(new Bullet(x, y, goRight));
+				world.add(new Bullet(x, y, goRight,type));
 			}
 		/*	if (spdY != 0) emitter.emit("trail", x - 10 + FP.rand(20), y - 10 + FP.rand(20));*/
 		}
@@ -172,6 +170,12 @@ package entities
 			}
 		}
 		
+		public function takeDamage(damage:int):void{
+			this.health -= damage;
+			
+			if (health <= 0)
+				FP.world.remove(this);
+		}
 		/** Handles animation. */
 		private function animation():void
 		{

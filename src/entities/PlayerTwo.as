@@ -35,7 +35,7 @@ package entities
 		//private var shootSpawn:Point;
 		
 		private var bullets:Vector.<Bullet>;
-		
+		private var health:int = 100;
 		public function PlayerTwo(x:Number=0, y:Number=0, graphic:Graphic=null, mask:Mask=null) 
 		{
 			graphic = image;
@@ -49,20 +49,36 @@ package entities
 						// Define input keys.
 			Input.define("R2", Key.RIGHT);
 			Input.define("L2", Key.LEFT);
-			Input.define("JUMP2", Key.CONTROL);
+			Input.define("JUMP2", Key.UP);
 			Input.define("SHOOT2", Key.DIGIT_0);
-			type = "playerTwo";
+			type = Constants.PLAYER_TWO_TYPE;
 			
 			bullets = new Vector.<Bullet>();
-			for (var i:int = 0; i < 10; i++) 
+/*			for (var i:int = 0; i < 10; i++) 
 			{
 				bullets.push(new Bullet());
 			}
+			
+			for (var j:int = 0; j < 10; j++) 
+			{
+				world.add(bullets[i]);
+			}*/
+		
 			//shootSpawn = new Point(image.originX + 16, image.originY + 2);
 		}
 		
 		private function shoot():void{
 
+			//for (var i:int = 0; i < 10 ; i++) 
+			//{
+				//if (bullets[i].IsActive)
+					//continue;
+					//
+				//bullets[i].SetIsActive(true, goRight);
+				//break;
+			//}
+			
+			FP.world.add(new Bullet(x+halfWidth,y,goRight,type));
 		}
 /** Update the player. */
 		private const SPEED:int = 100;
@@ -96,7 +112,7 @@ package entities
 			
 			if (Input.pressed("SHOOT2"))
 			{
-				world.add(new Bullet(x, y, goRight));
+				shoot();
 			}
 			
 		/*	if (spdY != 0) emitter.emit("trail", x - 10 + FP.rand(20), y - 10 + FP.rand(20));*/
@@ -204,6 +220,14 @@ package entities
 				////ROTATE.value = 0;
 			//}
 			//else image.angle = (spdX / MAXX) * 10 + ROTATE.value;
+		}
+		
+		public function takeDamage(damage:int):void
+		{
+			this.health -= damage;
+
+			if (health <= 0)
+			FP.world.remove(this);
 		}
 		
 		///** Horizontal collision handler. */
