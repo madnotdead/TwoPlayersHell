@@ -27,7 +27,7 @@ package entities
 			
 			itemIndex = Utils.randomRange(0, 902);
 			//trace("itemIndex: " + itemIndex);
-			if (itemIndex < 900)
+			if (itemIndex < 500)
 			{
 				image = new Image(Assets.ITEM_HEALTH);
 				itemName = Constants.ITEM_HEALTH_TYPE;
@@ -62,9 +62,7 @@ package entities
 			}
 			
 			x = position.x;
-			y = position.y;
-			trace("x: " + position.x + " - y: " + position.y);
-			
+			y = position.y;		
 		}
 		
 		override public function update():void 

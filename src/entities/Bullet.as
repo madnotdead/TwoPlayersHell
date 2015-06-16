@@ -64,7 +64,7 @@ package entities
 			
 			trace ("x: " + x);
 			
-			lifeTime += FP.elapsed;
+			//lifeTime += FP.elapsed;
 
 			var target:String = owner == Constants.PLAYER_ONE_TYPE ? Constants.PLAYER_TWO_TYPE : Constants.PLAYER_ONE_TYPE;
 			
@@ -73,17 +73,19 @@ package entities
 			if (target ==  Constants.PLAYER_ONE_TYPE)
 			{
 				p1 = collide(target, x, y) as PlayerOne;
+				
 				if(p1)
-				p1.takeDamage(this.damage);
+					p1.takeDamage(this.damage);
 			}
 			else
 			{
 				p2 = collide(target, x, y) as PlayerTwo;
+				
 				if(p2)
-				p2.takeDamage(this.damage);
+					p2.takeDamage(this.damage);
 			}
 			
-			if (x >= FP.screen.width || x < 0 || lifeTime > 1 || p1 || p2)
+			if (x >= FP.screen.width || x < 0 || p1 || p2)
 				destroy();
 			
 		}

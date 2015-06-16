@@ -35,6 +35,7 @@ package entities
 		public var spdX:Number = 0;
 		public var spdY:Number = 0;
 		public var image:Image = null;
+		public var godImage:Image = null;
 		private const SPEED:int = 100;
 		private var OnGround:Boolean = false;
 		private var goRight:Boolean = true;
@@ -68,7 +69,13 @@ package entities
 			{
 				godTimer += FP.elapsed;
 				
-				isGod = godTimer >= 2;
+				isGod = godTimer <= 7;
+				
+				if (!isGod)
+				{
+					graphic = image;
+					godTimer = 0;
+				}
 			}
 			
 			if (Input.pressed(shootTag))
@@ -210,7 +217,10 @@ package entities
 					addHealth(10);	
 				
 				if (item.itemName == Constants.ITEM_GOD_TYPE)
+				{
 					isGod = true;
+					graphic = godImage;
+				}
 				
 				FP.world.remove(item);
 			}

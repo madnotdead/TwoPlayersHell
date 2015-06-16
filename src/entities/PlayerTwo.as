@@ -22,7 +22,7 @@ package entities
 			image = new Image(Assets.PLAYER_TWO);
 			graphic = image;
 			mask = new Pixelmask(Assets.PLAYER_TWO);
-			
+			godImage = new Image(Assets.PLAYER_TWO_GOD);
 			super(x, y, graphic,mask);
 			
 			setHitbox(image.width, image.height);

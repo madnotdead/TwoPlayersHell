@@ -34,6 +34,16 @@ package
 		
 		[Embed(source="../assets/shield_anim.png")]
 		public static const ITEM_SHIELD_ANIM:Class;
+		
+		[Embed(source="../assets/player1_god.png")]
+		public static const PLAYER_ONE_GOD:Class;
+		
+		[Embed(source="../assets/player2_god.png")]
+		public static const PLAYER_TWO_GOD:Class;
+		
+		[Embed(source="../assets/main.mp3")]
+		public static const MAIN_THEME:Class;
+		
 	}
 
 }

@@ -21,6 +21,8 @@ package entities
 			graphic = image;
 			mask = new Pixelmask(Assets.PLAYER_ONE);
 			
+			godImage = new Image(Assets.PLAYER_ONE_GOD);
+			
 			super(x, y, graphic,mask);
 			
 			setHitbox(image.width, image.height);
