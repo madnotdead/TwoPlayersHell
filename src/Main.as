@@ -4,6 +4,7 @@ package
 	import net.flashpunk.FP;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
+	import worlds.*;
 	
 	/**
 	 * ...
@@ -16,16 +17,12 @@ package
 		{
 			super(800, 600);
 			
-			FP.world = new GameWorld();
+			FP.world = new Intro();
+			
+			FP.console.enable(); 
+			FP.console.toggleKey = 188; 
 		}
 		
-		override public function update():void 
-		{
-			super.update();
-			
-			 if (Input.pressed(Key.F1))
-				FP.console.enable();
-		}
 	}
 	
 }

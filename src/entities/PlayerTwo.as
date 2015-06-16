@@ -5,6 +5,7 @@ package entities
 	import net.flashpunk.Graphic;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.Mask;
+	import net.flashpunk.masks.Pixelmask;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	import net.flashpunk.FP;
@@ -12,246 +13,35 @@ package entities
 	 * ...
 	 * @author madnotdead
 	 */
-	public class PlayerTwo extends Entity 
+	public class PlayerTwo extends Player 
 	{
-		// Movement constants. 
-		public const MAXX:Number = 300;
-		public const MAXY:Number = 800;
-		public const GRAV:Number = 1500;
-		public const FLOAT:Number = 3000;
-		public const ACCEL:Number = 1200;
-		public const DRAG:Number = 800;
-		public const JUMP:Number = -500;
-		public const LEAP:Number = 1.5;
-	
-		private var OnGround:Boolean = false;
 		
-		private var image:Image = new Image(Assets.PLAYER_TWO);
-		
-		public var onSolid:Boolean;
-		public var spdX:Number = 0;
-		public var spdY:Number = 0;
-		private var goRight:Boolean = true;
-		//private var shootSpawn:Point;
-		
-		private var bullets:Vector.<Bullet>;
-		private var health:int = 100;
-		public function PlayerTwo(x:Number=0, y:Number=0, graphic:Graphic=null, mask:Mask=null) 
+				public function PlayerTwo(x:Number=0, y:Number=0, graphic:Graphic=null, mask:Mask=null) 
 		{
+			
+			image = new Image(Assets.PLAYER_TWO);
 			graphic = image;
+			mask = new Pixelmask(Assets.PLAYER_TWO);
 			
-/*			image.centerOO();
-			image.smooth = true;*/
+			super(x, y, graphic,mask);
 			
-			setHitbox(16, 16, 0, 0);
-			super(x, y, graphic);
+			setHitbox(image.width, image.height);
 			
-						// Define input keys.
-			Input.define("R2", Key.RIGHT);
-			Input.define("L2", Key.LEFT);
-			Input.define("JUMP2", Key.UP);
-			Input.define("SHOOT2", Key.DIGIT_0);
+			leftTag = "L2";
+			rightTag = "R2";
+			jumpTag = "JUMP2";
+			shootTag = "SHOOT2";
+			// Define input keys.
+			Input.define(rightTag, Key.RIGHT);
+			Input.define(leftTag, Key.LEFT);
+			Input.define(jumpTag, Key.UP);
+			Input.define(shootTag, Key.DIGIT_0);
+			
+			name = Constants.PLAYER_TWO_TYPE;
 			type = Constants.PLAYER_TWO_TYPE;
 			
-			bullets = new Vector.<Bullet>();
-/*			for (var i:int = 0; i < 10; i++) 
-			{
-				bullets.push(new Bullet());
-			}
-			
-			for (var j:int = 0; j < 10; j++) 
-			{
-				world.add(bullets[i]);
-			}*/
-		
-			//shootSpawn = new Point(image.originX + 16, image.originY + 2);
+			FP.world.add(new entities.Health (700,30,this));
 		}
-		
-		private function shoot():void{
-
-			//for (var i:int = 0; i < 10 ; i++) 
-			//{
-				//if (bullets[i].IsActive)
-					//continue;
-					//
-				//bullets[i].SetIsActive(true, goRight);
-				//break;
-			//}
-			
-			FP.world.add(new Bullet(x+halfWidth,y,goRight,type));
-		}
-/** Update the player. */
-		private const SPEED:int = 100;
-
-		
-		override public function update():void 
-		{
-			super.update();
-			/*
-			if (Input.check(Key.LEFT)) {
-				moveBy( -SPEED * FP.elapsed, 0, "level");
-				image.flipped = true;
-			} else if (Input.check(Key.RIGHT)) {
-				moveBy( SPEED * FP.elapsed, 0, "level");
-				image.flipped = false;
-			}
-			
-			if (Input.check(Key.UP)) {
-				moveBy(0, -SPEED * FP.elapsed, "level");
-			} else if (Input.check(Key.DOWN)) {
-				moveBy(0, SPEED * FP.elapsed, "level");
-			} */
-			
-			checkFloor();
-			gravity();
-			acceleration();
-			jumping();
-			moveBy(spdX * FP.elapsed, spdY * FP.elapsed, "level");
-			animation();
-			
-			
-			if (Input.pressed("SHOOT2"))
-			{
-				shoot();
-			}
-			
-		/*	if (spdY != 0) emitter.emit("trail", x - 10 + FP.rand(20), y - 10 + FP.rand(20));*/
-		}
-		
-		private function checkFloor():void
-		{
-			if (collide("level", x, y + 16)) onSolid = true;
-			else onSolid = false;
-		}
-		
-		/** Applies gravity to the player. */
-		private function gravity():void
-		{
-			if (onSolid) return;
-			var g:Number = GRAV;
-			if (spdY < 0 && !Input.check("JUMP2")) g += FLOAT;
-			spdY += g * FP.elapsed;
-			if (spdY > MAXY) spdY = MAXY;
-		}
-		
-		/** Accelerates the player based on input. */
-		private function acceleration():void
-		{
-			// evaluate input
-			var accel:Number = 0;
-			if (Input.check("R2")) 
-			{accel += ACCEL; goRight = true; }
-			if (Input.check("L2")) { accel -= ACCEL; goRight = false; }
-			
-			// handle acceleration
-			if (accel != 0)
-			{
-				if (accel > 0)
-				{
-					// accelerate right
-					if (spdX < MAXX)
-					{
-						spdX += accel * FP.elapsed;
-						if (spdX > MAXX) spdX = MAXX;
-					}
-					else accel = 0;
-				}
-				else
-				{
-					// accelerate left
-					if (spdX > -MAXX)
-					{
-						spdX += accel * FP.elapsed;
-						if (spdX < -MAXX) spdX = -MAXX;
-					}
-					else accel = 0;
-				}
-			}
-			
-			// handle decelleration
-			if (accel == 0)
-			{
-				if (spdX > 0)
-				{
-					spdX -= DRAG * FP.elapsed;
-					if (spdX < 0) spdX = 0;
-				}
-				else
-				{
-					spdX += DRAG * FP.elapsed;
-					if (spdX > 0) spdX = 0;
-				}
-			}
-		}
-		
-		/** Makes the player jump on input. */
-		private function jumping():void
-		{
-			if (onSolid && Input.pressed("JUMP2"))
-			{
-				spdY = JUMP;
-				onSolid = false;
-				if (spdX < 0 && image.flipped) spdX *= LEAP;
-				else if (spdX > 0 && !image.flipped) spdX *= LEAP;
-				
-				//SCALE.setMotion(1, 1.2, 1, 1, .2, Ease.quadIn);
-				//ROTATE.tween(0, 360 * -FP.sign(spdX), FP.scale(Math.abs(spdX), 0, MAXX, .7, .5), Ease.quadInOut);
-				
-				//var i:int = 10;
-				//while (i --) emitter.emit("dust", x - 10 + FP.rand(20) , y + 16);
-			}
-		}
-		
-		/** Handles animation. */
-		private function animation():void
-		{
-			// control facing direction
-			if (spdX != 0) image.flipped = spdX < 0;
-			
-			// image scale tweening
-			//image.scaleX = SCALE.x;
-			//image.scaleY = SCALE.y;
-			
-			//// image rotation
-			//if (onSolid)
-			//{
-				//image.angle = 0;
-				////ROTATE.active = false;
-				////ROTATE.value = 0;
-			//}
-			//else image.angle = (spdX / MAXX) * 10 + ROTATE.value;
-		}
-		
-		public function takeDamage(damage:int):void
-		{
-			this.health -= damage;
-
-			if (health <= 0)
-			FP.world.remove(this);
-		}
-		
-		///** Horizontal collision handler. */
-		//override protected function collideX(e:Entity):void 
-		//{
-			//if (spdX > 100 || spdX < -100) SCALE.setMotion(1, 1.2, 1, 1, .2, Ease.quadIn);
-			//spdX = 0;
-		//}
-		//
-		///** Vertical collision handler. */
-		//override protected function collideY(e:Entity):void 
-		//{
-			//if (spdY > 0)
-			//{
-				//SCALE.setMotion(1.2, 1, 1, 1, .2, Ease.quadIn);
-				//spdY = 0;
-				//spdX /= 2;
-			//}
-			//else
-			//{
-				//SCALE.setMotion(1.2, 1, 1, 1, .1, Ease.quadOut);
-				//spdY /= 2;
-			//}
-		//}
 	}
 
 }
