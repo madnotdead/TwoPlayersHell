@@ -1,5 +1,6 @@
 package entities 
 {
+	import flash.geom.Point;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.Graphic;
@@ -20,12 +21,12 @@ package entities
 		private var timeLifeCounter:Number = 0;
 		private var itemIndex:int;
 		private var image:Image;
-		
+		private var position:Point = null;
 		public function Item(x:Number=0, y:Number=0, graphic:Graphic=null, mask:Mask=null) 
 		{
 			
 			itemIndex = Utils.randomRange(0, 902);
-			trace("itemIndex: " + itemIndex);
+			//trace("itemIndex: " + itemIndex);
 			if (itemIndex < 900)
 			{
 				image = new Image(Assets.ITEM_HEALTH);
@@ -38,9 +39,32 @@ package entities
 			}
 			
 			graphic = image;
-			super(x, y, graphic, mask);
+			
 			setHitbox(image.width, image.height);
+			
+			super(x, y, graphic, mask);
+			
 			type = "item";
+		}
+		
+		override public function added():void 
+		{
+			super.added();
+			
+			position = new Point(Utils.randomRange(0, FP.screen.width), Utils.randomRange(0, FP.screen.height));
+		
+			var entity:Entity = collide("level", position.x, position.y) as Entity;
+			
+			while (entity)
+			{
+				position = new Point(Utils.randomRange(0, FP.screen.width), Utils.randomRange(0, FP.screen.height));
+				entity = collide("level", position.x, position.y)  as Entity;
+			}
+			
+			x = position.x;
+			y = position.y;
+			trace("x: " + position.x + " - y: " + position.y);
+			
 		}
 		
 		override public function update():void 

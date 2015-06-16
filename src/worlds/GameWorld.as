@@ -71,7 +71,7 @@ package worlds
 			//trace(dropTimeCounter);
 			if (dropTimeCounter >= dropTime)
 			{
-				add(new Item(Utils.randomRange(40, 730), 65));
+				add(new Item());
 				dropTimeCounter = 0;
 				dropTime = Utils.randomRange(3, 10);
 			}
