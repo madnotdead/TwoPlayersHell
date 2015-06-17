@@ -85,7 +85,10 @@ package entities
 					p2.takeDamage(this.damage);
 			}
 			
-			if (x >= FP.screen.width || x < 0 || p1 || p2)
+			
+			var level:Entity =  collide("level", x, y);
+			
+			if (x >= FP.screen.width || x < 0 || p1 || p2 || level)
 				destroy();
 			
 		}

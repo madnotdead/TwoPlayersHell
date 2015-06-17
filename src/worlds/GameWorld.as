@@ -55,9 +55,9 @@ package worlds
 		override public function update():void 
 		{
 			super.update();
-			
-			if(!mainTheme.playing)
-				mainTheme.loop();
+			//
+			//if(!mainTheme.playing)
+				//mainTheme.loop();
 		
 			existP1 = (this.classCount(PlayerOne) > 0)
 			existP2 = (this.classCount(PlayerTwo) > 0)
