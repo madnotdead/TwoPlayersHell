@@ -5,6 +5,7 @@ package entities
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.Mask;
 	import net.flashpunk.masks.Pixelmask;
+	import net.flashpunk.Sfx;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	import net.flashpunk.FP;
@@ -40,7 +41,9 @@ package entities
 			name = Constants.PLAYER_ONE_TYPE;
 			type = Constants.PLAYER_ONE_TYPE;
 			
-			FP.world.add(new entities.Health (30,30,this));
+			FP.world.add(new entities.Health (30, 30, this));
+			
+			shootSound = new Sfx(Assets.PLAYER_ONE_SHOOT);
 		}
 	}
 

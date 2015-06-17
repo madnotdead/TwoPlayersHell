@@ -7,6 +7,7 @@ package entities
 	import net.flashpunk.Entity;
 	import net.flashpunk.Graphic;
 	import net.flashpunk.masks.Pixelmask;
+	import net.flashpunk.Sfx;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	import net.flashpunk.FP;
@@ -43,6 +44,7 @@ package entities
 		private var health:int = 100;
 		private var isGod:Boolean = false;
 		private var godTimer:Number = 0;
+		public var shootSound:Sfx = null;
 		public function Player(x:Number=0, y:Number=0, graphic:Graphic=null, mask:Mask=null) 
 		{
 			super(x, y, graphic, mask);
@@ -80,7 +82,10 @@ package entities
 			
 			if (Input.pressed(shootTag))
 			{
-				world.add(new Bullet(x, y, goRight,type));
+				world.add(new Bullet(x, y, goRight, type));
+				
+				if(shootSound)
+					shootSound.play();
 			}
 		}
 		
