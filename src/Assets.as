@@ -6,13 +6,16 @@ package
 	 */
 	public class Assets 
 	{
-		[Embed(source="../assets/image/background.png")]
+		[Embed(source="../assets/image/mainBackground.png")]
+		public static const MAIN_BACKGROUND:Class;
+		
+		[Embed(source="../assets/image/background2.png")]
 		public static const BACKGROUND:Class;
 		
-		[Embed(source ="../assets/image/player1.png")]
+		[Embed(source ="../assets/image/player1_2.png")]
 		public static const PLAYER_ONE:Class;
 		
-		[Embed(source = "../assets/image/player2.png")]
+		[Embed(source = "../assets/image/player2_2.png")]
 		public static const PLAYER_TWO:Class;
 		
 		[Embed(source = "../assets/image/lofi_environment.png")]
@@ -21,11 +24,14 @@ package
 		[Embed(source = "../levels/L_01_2.oel", mimeType = "application/octet-stream")]
 		public static const LEVEL_01:Class;
 		
-		[Embed(source="../assets/image/bullet.png")]
-		public static const BULLET:Class;
+		[Embed(source="../assets/image/bullet_mask.png")]
+		public static const BULLET_MASK:Class;
 		
-		[Embed(source="../assets/image/bullet2.png")]
-		public static const BULLET2:Class;
+		[Embed(source="../assets/image/bullet_ss.png")]
+		public static const BULLET_SS:Class;
+		
+		[Embed(source="../assets/image/bullet2_ss.png")]
+		public static const BULLET2_SS:Class;
 		
 		[Embed(source="../assets/image/god.png")]
 		public static const ITEM_GOD:Class;
@@ -35,10 +41,10 @@ package
 		[Embed(source="../assets/image/shield_anim.png")]
 		public static const ITEM_SHIELD_ANIM:Class;
 		
-		[Embed(source="../assets/image/player1_god.png")]
+		[Embed(source="../assets/image/player1_god_2.png")]
 		public static const PLAYER_ONE_GOD:Class;
 		
-		[Embed(source="../assets/image/player2_god.png")]
+		[Embed(source="../assets/image/player2_god_2.png")]
 		public static const PLAYER_TWO_GOD:Class;
 		
 		[Embed(source="../assets/audio/main.mp3")]
@@ -50,6 +56,11 @@ package
 		[Embed(source="../assets/audio/shoot2.mp3")]
 		public static const PLAYER_TWO_SHOOT:Class;
 		
+		[Embed(source="../assets/audio/pick_item.mp3")]
+		public static const PICK_UP:Class;
+		
+		[Embed(source="../assets/audio/pick_item_GOD.mp3")]
+		public static const PICK_UP_GOD:Class;
 	}
 
 }

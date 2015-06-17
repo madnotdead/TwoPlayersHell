@@ -44,10 +44,11 @@ package worlds
 			add(new BackGround());
 			add(new Level(Assets.LEVEL_01));
 
-/*			mainTheme.volume = 1;
-				mainTheme.loop();
-			if (!mainTheme.playing)
-				mainTheme.play();*/
+			mainTheme.volume = .60;
+			mainTheme.loop();
+				//
+			//if (!mainTheme.playing)
+				//mainTheme.play();
 				
 
 		}
@@ -55,9 +56,6 @@ package worlds
 		override public function update():void 
 		{
 			super.update();
-			//
-			//if(!mainTheme.playing)
-				//mainTheme.loop();
 		
 			existP1 = (this.classCount(PlayerOne) > 0)
 			existP2 = (this.classCount(PlayerTwo) > 0)

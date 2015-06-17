@@ -18,6 +18,7 @@ package
 			graphic = new Backdrop(Assets.BACKGROUND);
 			graphic.scrollY = .5;
 			graphic.scrollX = .5;
+			
 			layer = 100;
 			super(x, y, graphic, mask);
 		}
@@ -27,7 +28,7 @@ package
 			super.update();
 			
 			x -= FP.elapsed * 10;
-			y -= FP.elapsed * 20;
+			y += FP.elapsed * 20;
 			
 		}
 		

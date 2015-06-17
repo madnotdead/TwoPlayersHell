@@ -43,6 +43,7 @@ package entities
 			
 			FP.world.add(new entities.Health (30, 30, this));
 			
+			
 			shootSound = new Sfx(Assets.PLAYER_ONE_SHOOT);
 		}
 	}

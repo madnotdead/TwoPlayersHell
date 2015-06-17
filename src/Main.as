@@ -18,9 +18,9 @@ package
 			super(800, 600);
 			
 			FP.world = new Intro();
-			
-			FP.console.enable(); 
-			FP.console.toggleKey = 188; 
+			//
+			//FP.console.enable(); 
+			//FP.console.toggleKey = 188; 
 		}
 		
 	}

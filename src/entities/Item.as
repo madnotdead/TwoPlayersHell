@@ -6,6 +6,7 @@ package entities
 	import net.flashpunk.Graphic;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.Mask;
+	import net.flashpunk.Sfx;
 	
 	/**
 	 * ...
@@ -17,25 +18,28 @@ package entities
 		private var touchGround:Boolean = false;
 	
 		public var itemName:String;
-		private var timeLife:int = 1.5;
+		private var timeLife:int = 3;
 		private var timeLifeCounter:Number = 0;
 		private var itemIndex:int;
 		private var image:Image;
 		private var position:Point = null;
+		private var pickUpSfx:Sfx = null;
 		public function Item(x:Number=0, y:Number=0, graphic:Graphic=null, mask:Mask=null) 
 		{
 			
 			itemIndex = Utils.randomRange(0, 902);
 			//trace("itemIndex: " + itemIndex);
-			if (itemIndex < 500)
+			if (itemIndex < 600)
 			{
 				image = new Image(Assets.ITEM_HEALTH);
 				itemName = Constants.ITEM_HEALTH_TYPE;
+				pickUpSfx = new Sfx(Assets.PICK_UP);
 			}
 			else
 			{
 				image = new Image(Assets.ITEM_GOD);
 				itemName = Constants.ITEM_GOD_TYPE;
+				pickUpSfx = new Sfx(Assets.PICK_UP_GOD);
 			}
 			
 			graphic = image;
@@ -88,6 +92,12 @@ package entities
 			 touchGround = true;
 			 else
 			 touchGround = false;
+		}
+		
+		public function collected():void{
+			pickUpSfx.play();
+			
+			FP.world.remove(this);
 		}
 	}
 

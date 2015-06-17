@@ -3,8 +3,10 @@ package entities
 	import net.flashpunk.Entity;
 	import net.flashpunk.Graphic;
 	import net.flashpunk.graphics.Image;
+	import net.flashpunk.graphics.Spritemap;
 	import net.flashpunk.Mask;
 	import net.flashpunk.FP;
+	import net.flashpunk.masks.Pixelmask;
 	/**
 	 * ...
 	 * @author madnotdead
@@ -18,6 +20,7 @@ package entities
 		private var isActive:Boolean = true;
 		private var damage:int = 10;
 		private var owner:String;
+		private var bulletSS:Spritemap;
 		
 		public function get IsActive():Boolean 
 		{ return isActive; }
@@ -39,16 +42,28 @@ package entities
 		
 		public function Bullet(x:Number=0, y:Number=0, goRight:Boolean = false,bulletOwner:String= "none", graphic:Graphic=null, mask:Mask=null) 
 		{
-			if(bulletOwner == Constants.PLAYER_ONE_TYPE)
-				image = new Image(Assets.BULLET)
+			
+			
+			if (bulletOwner == Constants.PLAYER_ONE_TYPE)
+				bulletSS = new Spritemap(Assets.BULLET_SS, 6, 4);
 			else
-				image = new Image(Assets.BULLET2);
-				
-			graphic = image;
+				bulletSS = new Spritemap(Assets.BULLET2_SS, 6, 4);
+			
+			bulletSS.add("beBullet", [0, 1, 2], 6);
+			
+			graphic = bulletSS;
+			
+			mask = new Pixelmask(Assets.BULLET_MASK);
+		
 			this.goRight = goRight;
 			this.owner = bulletOwner;
+			
+			bulletSS.flipped = !goRight;
+			
 			super(x, y, graphic, mask);
-			setHitbox(4, 4);
+			setHitbox(6, 4);
+			
+			bulletSS.play("beBullet");
 		}
 		private var lifeTime:Number = 0;
 		override public function update():void 

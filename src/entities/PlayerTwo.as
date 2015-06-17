@@ -17,7 +17,7 @@ package entities
 	public class PlayerTwo extends Player 
 	{
 		
-				public function PlayerTwo(x:Number=0, y:Number=0, graphic:Graphic=null, mask:Mask=null) 
+		public function PlayerTwo(x:Number=0, y:Number=0, graphic:Graphic=null, mask:Mask=null) 
 		{
 			
 			image = new Image(Assets.PLAYER_TWO);
@@ -41,7 +41,7 @@ package entities
 			name = Constants.PLAYER_TWO_TYPE;
 			type = Constants.PLAYER_TWO_TYPE;
 			
-			FP.world.add(new entities.Health (700, 30, this));
+			FP.world.add(new entities.Health (630, 30, this));
 			
 			shootSound = new Sfx(Assets.PLAYER_TWO_SHOOT);
 		}

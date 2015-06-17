@@ -14,10 +14,14 @@ package entities
 	public class Health extends Entity 
 	{
 		private var currentPlayer:Player = null;
+		private var playerText:String = null;
 		
 		public function Health(x:Number=0, y:Number=0, player:Player = null,graphic:Graphic=null, mask:Mask=null) 
 		{
-			graphic = new Text("Health: 0");
+			playerText = player.type;
+			var text:Text = new Text(playerText + "\n"+ "Health: 0");
+			text.scale = 1.5;
+			graphic = text;
 			super(x, y, graphic, mask);
 			
 			currentPlayer = player;
@@ -27,7 +31,7 @@ package entities
 		
 		public function SetHealth(health:int):void
 		{
-			Text(graphic).text = "Health: " + health;
+			Text(graphic).text = playerText + "\n"+"Health: " + health;
 		}
 		
 		override public function update():void 

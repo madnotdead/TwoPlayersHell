@@ -1,4 +1,4 @@
-package entities 
+package entities
 {
 	import net.flashpunk.Entity;
 	import net.flashpunk.Graphic;
@@ -16,7 +16,7 @@ package entities
 	 * ...
 	 * @author madnotdead
 	 */
-	public class Player extends Entity 
+	public class Player extends Entity
 	{
 		public var jumpTag:String;
 		public var leftTag:String;
@@ -45,7 +45,8 @@ package entities
 		private var isGod:Boolean = false;
 		private var godTimer:Number = 0;
 		public var shootSound:Sfx = null;
-		public function Player(x:Number=0, y:Number=0, graphic:Graphic=null, mask:Mask=null) 
+		
+		public function Player(x:Number = 0, y:Number = 0, graphic:Graphic = null, mask:Mask = null)
 		{
 			super(x, y, graphic, mask);
 		}
@@ -55,7 +56,7 @@ package entities
 			return this.health;
 		}
 		
-		override public function update():void 
+		override public function update():void
 		{
 			super.update();
 			
@@ -84,25 +85,30 @@ package entities
 			{
 				world.add(new Bullet(x, y, goRight, type));
 				
-				if(shootSound)
+				if (shootSound)
 					shootSound.play();
 			}
 		}
 		
 		private function checkFloor():void
 		{
-			if (collide("level", x, y + 16)) onSolid = true;
-			else onSolid = false;
+			if (collide("level", x, y + 16))
+				onSolid = true;
+			else
+				onSolid = false;
 		}
 		
 		/** Applies gravity to the player. */
 		private function gravity():void
 		{
-			if (onSolid) return;
+			if (onSolid)
+				return;
 			var g:Number = GRAV;
-			if (spdY < 0 && !Input.check(jumpTag)) g += FLOAT;
+			if (spdY < 0 && !Input.check(jumpTag))
+				g += FLOAT;
 			spdY += g * FP.elapsed;
-			if (spdY > MAXY) spdY = MAXY;
+			if (spdY > MAXY)
+				spdY = MAXY;
 		}
 		
 		/** Accelerates the player based on input. */
@@ -110,9 +116,16 @@ package entities
 		{
 			// evaluate input
 			var accel:Number = 0;
-			if (Input.check(rightTag)) 
-			{accel += ACCEL; goRight = true; }
-			if (Input.check(leftTag)) { accel -= ACCEL; goRight = false; }
+			if (Input.check(rightTag))
+			{
+				accel += ACCEL;
+				goRight = true;
+			}
+			if (Input.check(leftTag))
+			{
+				accel -= ACCEL;
+				goRight = false;
+			}
 			
 			// handle acceleration
 			if (accel != 0)
@@ -123,9 +136,11 @@ package entities
 					if (spdX < MAXX)
 					{
 						spdX += accel * FP.elapsed;
-						if (spdX > MAXX) spdX = MAXX;
+						if (spdX > MAXX)
+							spdX = MAXX;
 					}
-					else accel = 0;
+					else
+						accel = 0;
 				}
 				else
 				{
@@ -133,9 +148,11 @@ package entities
 					if (spdX > -MAXX)
 					{
 						spdX += accel * FP.elapsed;
-						if (spdX < -MAXX) spdX = -MAXX;
+						if (spdX < -MAXX)
+							spdX = -MAXX;
 					}
-					else accel = 0;
+					else
+						accel = 0;
 				}
 			}
 			
@@ -145,12 +162,14 @@ package entities
 				if (spdX > 0)
 				{
 					spdX -= DRAG * FP.elapsed;
-					if (spdX < 0) spdX = 0;
+					if (spdX < 0)
+						spdX = 0;
 				}
 				else
 				{
 					spdX += DRAG * FP.elapsed;
-					if (spdX > 0) spdX = 0;
+					if (spdX > 0)
+						spdX = 0;
 				}
 			}
 		}
@@ -162,26 +181,26 @@ package entities
 			{
 				spdY = JUMP;
 				onSolid = false;
-				if (spdX < 0 && image.flipped) spdX *= LEAP;
-				else if (spdX > 0 && !image.flipped) spdX *= LEAP;
-				
-				//SCALE.setMotion(1, 1.2, 1, 1, .2, Ease.quadIn);
-				//ROTATE.tween(0, 360 * -FP.sign(spdX), FP.scale(Math.abs(spdX), 0, MAXX, .7, .5), Ease.quadInOut);
-				
-				//var i:int = 10;
-				//while (i --) emitter.emit("dust", x - 10 + FP.rand(20) , y + 16);
+				if (spdX < 0 && image.flipped)
+					spdX *= LEAP;
+				else if (spdX > 0 && !image.flipped)
+					spdX *= LEAP;
 			}
 		}
 		
-		public function takeDamage(damage:uint):void {
+		public function takeDamage(damage:uint):void
+		{
 			
 			if (isGod)
-			return;
+				return;
 			
 			this.health -= damage;
 			
 			if (health <= 0)
+			{
+				health = 0;
 				FP.world.remove(this);
+			}
 		}
 		
 		public function addHealth(amount:uint):void
@@ -191,26 +210,14 @@ package entities
 			if (health > 100)
 				health = 100;
 		}
+		
 		/** Handles animation. */
 		private function animation():void
 		{
 			// control facing direction
-			if (spdX != 0) image.flipped = spdX < 0;
-			
-			// image scale tweening
-			//image.scaleX = SCALE.x;
-			//image.scaleY = SCALE.y;
-			
-			//// image rotation
-			//if (onSolid)
-			//{
-				//image.angle = 0;
-				////ROTATE.active = false;
-				////ROTATE.value = 0;
-			//}
-			//else image.angle = (spdX / MAXX) * 10 + ROTATE.value;
+			if (spdX != 0)
+				image.flipped = godImage.flipped = spdX < 0;
 		}
-			
 		
 		private function handleItemCollision():void
 		{
@@ -218,8 +225,8 @@ package entities
 			
 			if (item)
 			{
-				if (item.itemName ==  Constants.ITEM_HEALTH_TYPE)
-					addHealth(10);	
+				if (item.itemName == Constants.ITEM_HEALTH_TYPE)
+					addHealth(10);
 				
 				if (item.itemName == Constants.ITEM_GOD_TYPE)
 				{
@@ -227,7 +234,7 @@ package entities
 					graphic = godImage;
 				}
 				
-				FP.world.remove(item);
+				item.collected();
 			}
 		}
 	}
