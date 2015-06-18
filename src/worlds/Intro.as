@@ -80,7 +80,7 @@ package worlds
 			if (Input.check(Key.ANY))
 			{
 				removeAll();
-				FP.world = new GameWorld();
+				FP.world = new Instruction();
 			}
 		}
 		

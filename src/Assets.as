@@ -61,6 +61,9 @@ package
 		
 		[Embed(source="../assets/audio/pick_item_GOD.mp3")]
 		public static const PICK_UP_GOD:Class;
+		
+		[Embed(source="../assets/image/instructions.png")]
+		public static const INSTRUCTION:Class;
 	}
 
 }
