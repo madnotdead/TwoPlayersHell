@@ -67,6 +67,9 @@ package
 		
 		[Embed(source = "../assets/audio/buttonClick.mp3")]
 		public static const CLICK:Class;
+
+[Embed(source="../assets/image/instructions.png")]
+		public static const INSTRUCTION:Class;
 	}
 
 }

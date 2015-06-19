@@ -85,7 +85,7 @@ package worlds
 			{
 				clickSound.play();
 				removeAll();
-				FP.world = new GameWorld();
+				FP.world = new Instruction();
 			}
 		}
 		
