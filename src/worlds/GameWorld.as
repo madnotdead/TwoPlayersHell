@@ -28,12 +28,15 @@ package worlds
 		private var dropTimeCounter:Number = 0 ;
 		
 		private var mainTheme:Sfx = null;
+		private var winnerSFX:Sfx = null;
+
 		public function GameWorld() 
 		{
 			dropTime = Utils.randomRange(3, 10);
 			
 			mainTheme = new Sfx(Assets.MAIN_THEME);
 		
+			winnerSFX = new Sfx(Assets.WIN_SFX);
 
 		}
 		
@@ -46,20 +49,23 @@ package worlds
 
 			mainTheme.volume = .60;
 			mainTheme.loop();
-				//
-			//if (!mainTheme.playing)
-				//mainTheme.play();
-				
-
 		}
 		
 		override public function update():void 
 		{
 			super.update();
 		
-			existP1 = (this.classCount(PlayerOne) > 0)
-			existP2 = (this.classCount(PlayerTwo) > 0)
+			existP1 = (this.classCount(PlayerOne) > 0);
+			existP2 = (this.classCount(PlayerTwo) > 0);
 			
+			if (Input.pressed(Key.M))
+			{
+				if (mainTheme.playing)
+					mainTheme.stop()
+				else
+					mainTheme.play();
+			}
+					
 			if (!existP1 || !existP2)
 			{
 				trace("A player has died");
@@ -79,12 +85,17 @@ package worlds
 					restartText.x = (FP.screen.width - restartText.scaledWidth) / 2; 
 					restartText.y = FP.screen.height - 75;
 					restartOwner = addGraphic(restartText);
+					
+					winnerSFX.play();
+					mainTheme.stop();
 				}
 
 				
 				
 				if (Input.check(Key.SPACE))
 				{
+
+					
 					remove(winnerOwner);
 					remove(restartOwner);
 					restartText = null;
@@ -94,11 +105,8 @@ package worlds
 					add(new BackGround());
 					add(new Level(Assets.LEVEL_01));
 					
-					if (mainTheme.playing)
-					{
-						mainTheme.stop();
+					if (!mainTheme.playing)
 						mainTheme.play();
-					}
 				}
 			}
 			

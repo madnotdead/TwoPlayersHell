@@ -11,6 +11,7 @@ package worlds
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	import net.flashpunk.World;
+	import net.flashpunk.Sfx;
 	
 	/**
 	 * ...
@@ -29,12 +30,15 @@ package worlds
 		private var background:Image;
 		private var alphaTween:ColorTween = null;
 		private var titleColorTween:ColorTween = null;
+		private var clickSound:Sfx = null;
 		
 		public function Intro() 
 		{
 			super();
 			background = new Image(Assets.MAIN_BACKGROUND);
 			backgroundOwner = addGraphic(background);
+			clickSound = new Sfx(Assets.CLICK);
+			clickSound.volume = 1;
 		}
 		
 		override public function begin():void 
@@ -57,7 +61,7 @@ package worlds
 			pressButtonText.x =(FP.screen.width - pressButtonText.scaledWidth)/2;
 			pressButtonText.y = 500;
 			alphaTween = new ColorTween(null,LOOPING);
-			alphaTween.tween(.5, 0xffffff, 0xFFFF99, 1, 0);
+			alphaTween.tween(.5, 0xffffff, 0xFFFF00, 1, 0);
 			addTween(alphaTween, true);
 			
 			pressOwner = addGraphic(pressButtonText);
@@ -79,6 +83,7 @@ package worlds
 			titleText.color = titleColorTween.color;
 			if (Input.check(Key.ANY))
 			{
+				clickSound.play();
 				removeAll();
 				FP.world = new GameWorld();
 			}

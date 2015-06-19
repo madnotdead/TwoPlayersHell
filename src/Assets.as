@@ -61,6 +61,12 @@ package
 		
 		[Embed(source="../assets/audio/pick_item_GOD.mp3")]
 		public static const PICK_UP_GOD:Class;
+		
+		[Embed(source="../assets/audio/blastoff.mp3")]
+		public static const WIN_SFX:Class;
+		
+		[Embed(source = "../assets/audio/buttonClick.mp3")]
+		public static const CLICK:Class;
 	}
 
 }
