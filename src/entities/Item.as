@@ -5,7 +5,9 @@ package entities
 	import net.flashpunk.FP;
 	import net.flashpunk.Graphic;
 	import net.flashpunk.graphics.Image;
+	import net.flashpunk.graphics.Spritemap;
 	import net.flashpunk.Mask;
+	import net.flashpunk.masks.Pixelmask;
 	import net.flashpunk.Sfx;
 	
 	/**
@@ -24,27 +26,35 @@ package entities
 		private var image:Image;
 		private var position:Point = null;
 		private var pickUpSfx:Sfx = null;
+		private var spriteS:Spritemap = null;
 		public function Item(x:Number=0, y:Number=0, graphic:Graphic=null, mask:Mask=null) 
 		{
 			
 			itemIndex = Utils.randomRange(0, 902);
 			//trace("itemIndex: " + itemIndex);
-			if (itemIndex < 600)
+			if (itemIndex < 800)
 			{
 				image = new Image(Assets.ITEM_HEALTH);
+				spriteS = new Spritemap(Assets.ITEM_HEALTH_ANIM, 14, 14);
+				spriteS.add("play", [0, 1, 2], 6);
+				spriteS.play("play");
 				itemName = Constants.ITEM_HEALTH_TYPE;
 				pickUpSfx = new Sfx(Assets.PICK_UP);
 			}
 			else
-			{
-				image = new Image(Assets.ITEM_GOD);
+			{	
+				spriteS = new Spritemap(Assets.ITEM_GOD_ANIM, 14, 14);
+				spriteS.add("play", [0, 1, 2], 6);
+				spriteS.play("play");
 				itemName = Constants.ITEM_GOD_TYPE;
 				pickUpSfx = new Sfx(Assets.PICK_UP_GOD);
 			}
 			
-			graphic = image;
+			graphic = spriteS;
 			
-			setHitbox(image.width, image.height);
+			mask = new Pixelmask(Assets.ITEM_GOD);
+			
+			setHitbox(14, 14);
 			
 			super(x, y, graphic, mask);
 			

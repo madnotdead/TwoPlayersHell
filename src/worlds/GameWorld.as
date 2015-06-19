@@ -63,7 +63,7 @@ package worlds
 				if (mainTheme.playing)
 					mainTheme.stop()
 				else
-					mainTheme.play();
+					mainTheme.loop();
 			}
 					
 			if (!existP1 || !existP2)
@@ -94,8 +94,6 @@ package worlds
 				
 				if (Input.check(Key.SPACE))
 				{
-
-					
 					remove(winnerOwner);
 					remove(restartOwner);
 					restartText = null;
@@ -106,7 +104,7 @@ package worlds
 					add(new Level(Assets.LEVEL_01));
 					
 					if (!mainTheme.playing)
-						mainTheme.play();
+						mainTheme.loop();
 				}
 			}
 			

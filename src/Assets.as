@@ -32,11 +32,7 @@ package
 		
 		[Embed(source="../assets/image/bullet2_ss.png")]
 		public static const BULLET2_SS:Class;
-		
-		[Embed(source="../assets/image/god.png")]
-		public static const ITEM_GOD:Class;
-		[Embed(source="../assets/image/health.png")]
-		public static const ITEM_HEALTH:Class;
+
 		
 		[Embed(source="../assets/image/shield_anim.png")]
 		public static const ITEM_SHIELD_ANIM:Class;
@@ -67,9 +63,20 @@ package
 		
 		[Embed(source = "../assets/audio/buttonClick.mp3")]
 		public static const CLICK:Class;
-
-[Embed(source="../assets/image/instructions.png")]
+	
+		[Embed(source="../assets/image/instructions.png")]
 		public static const INSTRUCTION:Class;
+		
+				
+		[Embed(source="../assets/image/god_anim.png")]
+		public static const ITEM_GOD_ANIM:Class;
+		[Embed(source="../assets/image/health_anim.png")]
+		public static const ITEM_HEALTH_ANIM:Class;
+		
+		[Embed(source="../assets/image/god.png")]
+		public static const ITEM_GOD:Class;
+		[Embed(source="../assets/image/health.png")]
+		public static const ITEM_HEALTH:Class;
 	}
 
 }
