@@ -47,7 +47,7 @@ package worlds
 			add(new BackGround());
 			add(new Level(Assets.LEVEL_01));
 
-			mainTheme.volume = .60;
+			mainTheme.volume = 0;
 			mainTheme.loop();
 		}
 		
@@ -63,7 +63,7 @@ package worlds
 				if (mainTheme.playing)
 					mainTheme.stop()
 				else
-					mainTheme.play();
+					mainTheme.loop();
 			}
 					
 			if (!existP1 || !existP2)
@@ -106,7 +106,7 @@ package worlds
 					add(new Level(Assets.LEVEL_01));
 					
 					if (!mainTheme.playing)
-						mainTheme.play();
+						mainTheme.loop();
 				}
 			}
 			

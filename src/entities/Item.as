@@ -29,7 +29,7 @@ package entities
 			
 			itemIndex = Utils.randomRange(0, 902);
 			//trace("itemIndex: " + itemIndex);
-			if (itemIndex < 600)
+			if (itemIndex < 800)
 			{
 				image = new Image(Assets.ITEM_HEALTH);
 				itemName = Constants.ITEM_HEALTH_TYPE;

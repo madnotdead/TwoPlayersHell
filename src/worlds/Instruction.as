@@ -5,6 +5,7 @@ package worlds
 	import net.flashpunk.Graphic;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Text;
+	import net.flashpunk.Sfx;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	import net.flashpunk.World;
@@ -18,10 +19,12 @@ package worlds
 	
 		private var instruction:Text = null;
 		private var background:Image = null;
-		
+		private var clickSound:Sfx = null;
 		public function Instruction() 
 		{
 			super();
+			clickSound = new Sfx(Assets.CLICK);
+			clickSound.volume = 1;
 		}
 		
 		override public function begin():void 
@@ -41,7 +44,7 @@ package worlds
 		override public function update():void 
 		{
 			super.update();
-			
+			clickSound.play();
 			if (Input.pressed(Key.SPACE))
 				FP.world = new GameWorld();
 		}
