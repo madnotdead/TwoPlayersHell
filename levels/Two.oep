@@ -16,7 +16,7 @@
     <Width>800</Width>
     <Height>600</Height>
   </LevelMaximumSize>
-  <Filename>C:\Users\Leandro\Documents\TwoPlayersHell\levels\Two.oep</Filename>
+  <Filename>C:\Users\O23002\Documents\TwoPlayersHell\levels\Two.oep</Filename>
   <AngleMode>Radians</AngleMode>
   <CameraEnabled>false</CameraEnabled>
   <CameraSize>
@@ -51,7 +51,7 @@
         <X>1</X>
         <Y>1</Y>
       </ScrollFactor>
-      <ExportMode>TrimmedCSV</ExportMode>
+      <ExportMode>CSV</ExportMode>
     </LayerDefinition>
     <LayerDefinition xsi:type="EntityLayerDefinition">
       <Name>entities</Name>
@@ -86,7 +86,7 @@
         <X>0</X>
         <Y>0</Y>
       </Origin>
-      <ImageDefinition DrawMode="Image" ImagePath="..\assets\player1.png" Tiled="false">
+      <ImageDefinition DrawMode="Image" ImagePath="..\assets\image\player1_2.png" Tiled="false">
         <RectColor A="255" R="255" G="0" B="0" />
       </ImageDefinition>
       <ValueDefinitions />
@@ -101,7 +101,7 @@
         <X>0</X>
         <Y>0</Y>
       </Origin>
-      <ImageDefinition DrawMode="Image" ImagePath="..\assets\player2.png" Tiled="false">
+      <ImageDefinition DrawMode="Image" ImagePath="..\assets\image\player2_2.png" Tiled="false">
         <RectColor A="255" R="255" G="0" B="0" />
       </ImageDefinition>
       <ValueDefinitions />

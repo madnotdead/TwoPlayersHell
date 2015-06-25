@@ -44,9 +44,12 @@ package worlds
 		override public function update():void 
 		{
 			super.update();
-			clickSound.play();
+
 			if (Input.pressed(Key.SPACE))
+			{
+				clickSound.play();
 				FP.world = new GameWorld();
+			}
 		}
 	}
 

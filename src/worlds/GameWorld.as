@@ -94,8 +94,6 @@ package worlds
 				
 				if (Input.check(Key.SPACE))
 				{
-
-					
 					remove(winnerOwner);
 					remove(restartOwner);
 					restartText = null;
